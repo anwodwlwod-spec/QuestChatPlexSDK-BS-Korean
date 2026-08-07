@@ -3,7 +3,9 @@
 #include "assets.hpp"
 
 #include <UnityEngine/Application.hpp>
+#include <UnityEngine/Font.hpp>
 #include <TMPro/TMP_TextUtilities.hpp>
+#include <TMPro/AtlasPopulationMode.hpp>
 #include <beatsaber-hook/shared/utils/il2cpp-utils.hpp>
 
 using namespace TMPro;
@@ -45,6 +47,43 @@ using namespace UnityEngine;
 /// End of temp fix
 
 namespace CP_SDK::Unity {
+
+    /// @brief Turn Beat Saber's Korean TMP fallback into a dynamic font asset.
+    ///        Missing glyphs are generated on demand from Quest's system CJK font.
+    static void EnsureKoreanDynamicFallback()
+    {
+        static bool s_IsReady = false;
+        if (s_IsReady)
+            return;
+
+        try
+        {
+            auto l_KoreanFont = UnityEngine::Resources::FindObjectsOfTypeAll<TMPro::TMP_FontAsset*>()->FirstOrDefault(
+                [](auto x) { return x && x->get_name() == u"NotoSansKR-Medium SDF"; }
+            );
+
+            if (!l_KoreanFont)
+                return;
+
+            auto l_SourceFont = UnityEngine::Font::New_ctor(u"/system/fonts/NotoSansCJK-Regular.ttc");
+            if (!l_SourceFont)
+            {
+                ChatPlexSDK::Logger()->Error(u"[CP_SDK.Unity][KoreanFont] Failed to open Quest NotoSansCJK-Regular.ttc");
+                return;
+            }
+
+            l_KoreanFont->set_sourceFontFile(l_SourceFont);
+            l_KoreanFont->set_atlasPopulationMode(TMPro::AtlasPopulationMode(TMPro::AtlasPopulationMode::Dynamic));
+
+            s_IsReady = true;
+            ChatPlexSDK::Logger()->Info(u"[CP_SDK.Unity][KoreanFont] Dynamic Korean fallback enabled");
+        }
+        catch (const std::exception& p_Exception)
+        {
+            ChatPlexSDK::Logger()->Error(u"[CP_SDK.Unity][KoreanFont] Failed to enable dynamic Korean fallback");
+            ChatPlexSDK::Logger()->Error(p_Exception);
+        }
+    }
 
     bool                                                FontManager::m_IsInitialized        = false;
     _v::MonoPtr<AssetBundle>                            FontManager::m_AssetBundle          = nullptr;
@@ -124,6 +163,7 @@ namespace CP_SDK::Unity {
             */
         }
 
+        EnsureKoreanDynamicFallback();
         return m_MainFont.Ptr();
     }
     /// @brief Get chat font
@@ -143,6 +183,7 @@ namespace CP_SDK::Unity {
                 m_ChatFont = m_TMPFontAssetSetup(m_ChatFont.Ptr());
         }
 
+        EnsureKoreanDynamicFallback();
         return m_ChatFont.Ptr();
     }
 
