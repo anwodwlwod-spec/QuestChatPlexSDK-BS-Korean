@@ -117,9 +117,6 @@ void PatchUI()
             x->get_gameObject()->AddComponent<VRUIControls::VRGraphicRaycaster*>()->____physicsRaycaster = m_VRGraphicRaycasterCache->____physicsRaycaster;
     };
 
-    ////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////
-
     CP_SDK::UI::ScreenSystem::OnCreated += []() -> void
     {
         auto l_Instance = CP_SDK::UI::ScreenSystem::Instance();
@@ -217,7 +214,7 @@ extern "C" __attribute__((visibility("default"))) void setup(CModInfo* p_ModInfo
 
 static bool s_IsLoaded = false;
 
-// Called later on in game loading - a good time to install function hooks
+// Called later on in the game loading - a good time to install function hooks
 extern "C" __attribute__((visibility("default"))) void late_load()
 {
     if (s_IsLoaded)
