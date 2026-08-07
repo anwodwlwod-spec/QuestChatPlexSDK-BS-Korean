@@ -8,8 +8,6 @@ on:
       - 'dev'
       - 'korean-localization'
     paths-ignore:
-      - '**.yml'
-      - '!.github/workflows/build-ndk.yml'
       - '**.json'
       - '!qpm.json'
       - '!mod.template.json'
@@ -32,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       name: Checkout
       with:
         submodules: true
@@ -54,11 +52,13 @@ jobs:
         echo "VERSION=${GITHUB_REF#refs/tags/v}" >> ${GITHUB_OUTPUT}
 
     - name: Setup qpm
-      uses: Fernthedev/qpm-action@main
+      uses: Fernthedev/qpm-action@v1
       with:
         workflow_token: ${{ secrets.GITHUB_TOKEN }}
+        qpm_version: version@^1.0.0
         restore: true
         cache: true
+        resolve_ndk: true
         publish: false
         qpm_qmod: ${{ env.qmodName }}.qmod
 
