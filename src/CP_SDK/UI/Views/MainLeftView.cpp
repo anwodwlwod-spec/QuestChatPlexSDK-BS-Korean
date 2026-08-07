@@ -30,20 +30,20 @@ namespace CP_SDK::UI::Views {
     void MainLeftView::OnViewCreation_Impl()
     {
         Templates::FullRectLayout({
-            Templates::TitleBar(u"Information"),
+            Templates::TitleBar(u"정보"),
 
             Templates::ScrollableInfos(50, {
-                XUIText::Make(u"<b>Welcome to " + FlowCoordinators::MainFlowCoordinator::Instance()->Title() + u"</b>\nMade by HardCPP!")
+                XUIText::Make(u"<b>" + FlowCoordinators::MainFlowCoordinator::Instance()->Title() + u"에 오신 것을 환영합니다!</b>\nHardCPP 제작")
                     ->SetAlign(TMPro::TextAlignmentOptions::CaplineLeft)
                     ->AsShared()
             }),
 
             Templates::ExpandedButtonsLine({
-                XUIPrimaryButton::Make(u"Documentation", {this, &MainLeftView::OnDocumentationButton})->AsShared(),
-                XUIPrimaryButton::Make(u"Discord", {this, &MainLeftView::OnDiscordButton})->AsShared()
+                XUIPrimaryButton::Make(u"문서", {this, &MainLeftView::OnDocumentationButton})->AsShared(),
+                XUIPrimaryButton::Make(u"디스코드", {this, &MainLeftView::OnDiscordButton})->AsShared()
             }),
             Templates::ExpandedButtonsLine({
-                XUISecondaryButton::Make(u"Donate - Patreon", {this, &MainLeftView::OnDonateButton})->AsShared()
+                XUISecondaryButton::Make(u"후원 - Patreon", {this, &MainLeftView::OnDonateButton})->AsShared()
             })
         })
         ->SetBackground(true, std::nullopt, true)
@@ -56,13 +56,13 @@ namespace CP_SDK::UI::Views {
     /// @brief Documentation button
     void MainLeftView::OnDocumentationButton()
     {
-        ShowMessageModal(u"URL opened in your web browser.");
+        ShowMessageModal(u"웹 브라우저에서 URL을 열었습니다.");
         ChatPlexSDK::OpenURL(u"https://github.com/hardcpp/BeatSaberPlus/wiki");
     }
     /// @brief Go to discord
     void MainLeftView::OnDiscordButton()
     {
-        ShowMessageModal(u"URL opened in your web browser.");
+        ShowMessageModal(u"웹 브라우저에서 URL을 열었습니다.");
         ChatPlexSDK::OpenURL(u"https://discord.chatplex.org");
     }
 
@@ -72,7 +72,7 @@ namespace CP_SDK::UI::Views {
     /// @brief Go to donate
     void MainLeftView::OnDonateButton()
     {
-        ShowMessageModal(u"URL opened in your web browser.");
+        ShowMessageModal(u"웹 브라우저에서 URL을 열었습니다.");
         ChatPlexSDK::OpenURL(u"https://donate.chatplex.org");
     }
 
