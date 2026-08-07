@@ -164,9 +164,9 @@ void OnEnable()
     l_HasBSPModules = true;
     if (l_HasBSPModules)
     {
-        CP_SDK::UI::FlowCoordinators::MainFlowCoordinator::OverrideTitle(u"QBeatSaberPlus");
+        CP_SDK::UI::FlowCoordinators::MainFlowCoordinator::OverrideTitle(u"큐비트세이버+");
 
-        BSML::Register::RegisterMenuButton("QBeatSaber+", s_ModInfo.id,
+        BSML::Register::RegisterMenuButton("큐비트세이버+", s_ModInfo.id,
             [](){
                 CP_SDK::UI::FlowCoordinators::MainFlowCoordinator::Instance()->Present(true);
             }
@@ -217,7 +217,7 @@ extern "C" __attribute__((visibility("default"))) void setup(CModInfo* p_ModInfo
 
 static bool s_IsLoaded = false;
 
-// Called later on in the game loading - a good time to install function hooks
+// Called later on in game loading - a good time to install function hooks
 extern "C" __attribute__((visibility("default"))) void late_load()
 {
     if (s_IsLoaded)
