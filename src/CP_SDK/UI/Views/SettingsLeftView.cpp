@@ -37,7 +37,7 @@ namespace CP_SDK::UI::Views {
         auto l_Sprite = Unity::SpriteU::CreateFromRaw(Assets::ChatPlexLogoTransparent_png);
 
         Templates::FullRectLayout({
-                Templates::TitleBar(u"ChatPlex Account"),
+                Templates::TitleBar(u"ChatPlex 계정"),
 
                 XUIPrimaryButton::Make(u"")
                     ->SetBackgroundSprite(nullptr)
@@ -46,7 +46,7 @@ namespace CP_SDK::UI::Views {
                     ->SetHeight(52)
                     ->AsShared(),
 
-                XUIText::Make(u"Not connected")
+                XUIText::Make(u"연결되지 않음")
                     ->Bind(&m_StatusText)
                     ->AsShared(),
 
@@ -55,10 +55,10 @@ namespace CP_SDK::UI::Views {
                     ->AsShared(),
 
                 XUIVLayout::Make({
-                    XUIPrimaryButton::Make(u"Connect", {this, &SettingsLeftView::OnPrimaryButtonPressed})
+                    XUIPrimaryButton::Make(u"연결", {this, &SettingsLeftView::OnPrimaryButtonPressed})
                         ->Bind(&m_PrimaryButton)
                         ->AsShared(),
-                    XUISecondaryButton::Make(u"Disconnect", {this, &SettingsLeftView::OnSecondaryButtonPressed})
+                    XUISecondaryButton::Make(u"연결 해제", {this, &SettingsLeftView::OnSecondaryButtonPressed})
                         ->Bind(&m_SecondaryButton)
                         ->AsShared()
                 })
@@ -105,7 +105,7 @@ namespace CP_SDK::UI::Views {
         {
             m_IsLinking = true;
             ChatPlexService::StartLinking();
-            ShowLoadingModal(u"Loading...", true, {this, &SettingsLeftView::OnLoadingCancel});
+            ShowLoadingModal(u"불러오는 중...", true, {this, &SettingsLeftView::OnLoadingCancel});
         }
         else if (ChatPlexService::State() == ChatPlexService::EState::Error || ChatPlexService::State() == ChatPlexService::EState::Connected)
         {
@@ -140,10 +140,10 @@ namespace CP_SDK::UI::Views {
             if (m_IsLinking)
             {
                 if (newState == ChatPlexService::EState::LinkRequest)
-                    ShowLoadingModal(u"Creating link request...", true, {this, &SettingsLeftView::OnLoadingCancel});
+                    ShowLoadingModal(u"연결 요청 생성 중...", true, {this, &SettingsLeftView::OnLoadingCancel});
                 else if (newState == ChatPlexService::EState::LinkWait)
                     ShowLoadingModal(
-                        std::u16string(u"Go to https://chatplex.org/link and the input following code\n") + ChatPlexService::LinkCode(),
+                        std::u16string(u"https://chatplex.org/link 에 접속한 뒤 다음 코드를 입력하세요\n") + ChatPlexService::LinkCode(),
                         true,
                         {this, &SettingsLeftView::OnLoadingCancel}
                     );
@@ -152,7 +152,7 @@ namespace CP_SDK::UI::Views {
                     m_IsLinking = false;
 
                     CloseLoadingModal();
-                    ShowMessageModal(u"Error: " + ChatPlexService::LastError());
+                    ShowMessageModal(u"오류: " + ChatPlexService::LastError());
                 }
                 else
                 {
@@ -165,42 +165,42 @@ namespace CP_SDK::UI::Views {
             {
                 case ChatPlexService::EState::Disconnected:
                     m_StatusText->SetColor(Color::get_red());
-                    m_StatusText->SetText(u"Disconected!");
+                    m_StatusText->SetText(u"연결 끊김!");
                     m_PrimaryButton->SetInteractable(true);
-                    m_PrimaryButton->SetText(u"Connect");
+                    m_PrimaryButton->SetText(u"연결");
                     m_SecondaryButton->SetInteractable(false);
                     break;
 
                 case ChatPlexService::EState::Error:
                     m_StatusText->SetColor(Color::get_red());
-                    m_StatusText->SetText(u"Disconected, error!");
+                    m_StatusText->SetText(u"연결 오류!");
                     m_PrimaryButton->SetInteractable(true);
-                    m_PrimaryButton->SetText(u"Connect");
+                    m_PrimaryButton->SetText(u"연결");
                     m_SecondaryButton->SetInteractable(false);
                     break;
 
                 case ChatPlexService::EState::Connecting:
                     m_StatusText->SetColor(Color::get_blue());
-                    m_StatusText->SetText(u"Connecting...");
+                    m_StatusText->SetText(u"연결 중...");
                     m_PrimaryButton->SetInteractable(false);
-                    m_PrimaryButton->SetText(u"Connect");
+                    m_PrimaryButton->SetText(u"연결");
                     m_SecondaryButton->SetInteractable(false);
                     break;
 
                 case ChatPlexService::EState::LinkRequest:
                 case ChatPlexService::EState::LinkWait:
                     m_StatusText->SetColor(Color::get_blue());
-                    m_StatusText->SetText(u"Linking account...");
+                    m_StatusText->SetText(u"계정 연결 중...");
                     m_PrimaryButton->SetInteractable(false);
-                    m_PrimaryButton->SetText(u"Connect");
+                    m_PrimaryButton->SetText(u"연결");
                     m_SecondaryButton->SetInteractable(false);
                     break;
 
                 case ChatPlexService::EState::Connected:
                     m_StatusText->SetColor(Color::get_green());
-                    m_StatusText->SetText(u"Connected!");
+                    m_StatusText->SetText(u"연결됨!");
                     m_PrimaryButton->SetInteractable(true);
-                    m_PrimaryButton->SetText(u"Refresh");
+                    m_PrimaryButton->SetText(u"새로고침");
                     m_SecondaryButton->SetInteractable(true);
                     break;
             }
