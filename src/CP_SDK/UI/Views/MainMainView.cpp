@@ -59,7 +59,7 @@ namespace CP_SDK::UI::Views {
         }
 
         Templates::FullRectLayout({
-            Templates::TitleBar(u"Modules"),
+            Templates::TitleBar(u"모듈"),
 
             XUIGLayout::Make(
                 l_Buttons
@@ -74,7 +74,7 @@ namespace CP_SDK::UI::Views {
             ->AsShared(),
 
             Templates::ExpandedButtonsLine({
-                XUIPrimaryButton::Make(u"Settings", {this, &MainMainView::OnSettingsPressed})->AsShared()
+                XUIPrimaryButton::Make(u"설정", {this, &MainMainView::OnSettingsPressed})->AsShared()
             })
         })
         ->SetBackground(true, std::nullopt, true)
@@ -90,7 +90,7 @@ namespace CP_SDK::UI::Views {
         /// Show welcome message
         if (CPConfig::Instance()->FirstRun)
         {
-            ShowMessageModal(u"<color=yellow><b>Welcome to " + FlowCoordinators::MainFlowCoordinator::Instance()->Title() + u"!</b></color>\nBy default most modules are disabled, you can enable/disable them\nany time by clicking the <b>Settings</b> button below");
+            ShowMessageModal(u"<color=yellow><b>" + FlowCoordinators::MainFlowCoordinator::Instance()->Title() + u"에 오신 것을 환영합니다!</b></color>\n기본적으로 대부분의 모듈은 비활성화되어 있습니다.\n아래 <b>설정</b> 버튼에서 언제든지 활성화하거나 비활성화할 수 있습니다.");
             CPConfig::Instance()->FirstRun = false;
             CPConfig::Instance()->Save();
         }
