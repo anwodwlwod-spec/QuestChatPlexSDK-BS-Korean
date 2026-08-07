@@ -38,7 +38,7 @@ namespace CP_SDK::Utils {
             t_Ptr* Ptr(bool p_Throw = true) const
             {
                 auto l_IsDead = !m_Wrapper || !m_Wrapper->Ptr;
-                if constexpr (std::is_assignable_v<UnityEngine::Object, t_Ptr>)
+                if constexpr (std::is_base_of_v<UnityEngine::Object, t_Ptr>)
                 {
                     auto l_UObject = reinterpret_cast<UnityEngine::Object*>(m_Wrapper->Ptr);
                     if (l_IsDead || !l_UObject->___m_CachedPtr.m_value)
@@ -56,7 +56,7 @@ namespace CP_SDK::Utils {
 
             bool IsUnityObject()
             {
-                if constexpr (std::is_assignable_v<UnityEngine::Object, t_Ptr>)
+                if constexpr (std::is_base_of_v<UnityEngine::Object, t_Ptr>)
                     return true;
 
                 return false;
