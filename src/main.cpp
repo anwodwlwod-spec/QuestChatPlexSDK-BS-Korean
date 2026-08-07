@@ -163,7 +163,7 @@ void OnEnable()
     {
         CP_SDK::UI::FlowCoordinators::MainFlowCoordinator::OverrideTitle(u"큐비트세이버+");
 
-        BSML::Register::RegisterMenuButton("큐비트세이버+", s_ModInfo.id,
+        BSML::Register::RegisterMenuButton("큐비트세이버+", "큐비트세이버+ 설정 열기",
             [](){
                 CP_SDK::UI::FlowCoordinators::MainFlowCoordinator::Instance()->Present(true);
             }
