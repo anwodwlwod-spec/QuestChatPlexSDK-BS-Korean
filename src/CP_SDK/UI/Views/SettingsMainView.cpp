@@ -76,7 +76,7 @@ namespace CP_SDK::UI::Views {
                             ->SetOverflowMode(TMPro::TextOverflowModes::Ellipsis)
                             ->AsShared(),
 
-                        XUIPrimaryButton::Make(u"Documentation", [this, l_Module]() -> void { OnDocumentationButton(l_Module); })
+                        XUIPrimaryButton::Make(u"문서", [this, l_Module]() -> void { OnDocumentationButton(l_Module); })
                             ->SetInteractable(!l_Module->DocumentationURL().empty())
                             ->AsShared()
                     })
@@ -99,7 +99,7 @@ namespace CP_SDK::UI::Views {
         }
 
         Templates::FullRectLayout({
-            Templates::TitleBar(u"Modules"),
+            Templates::TitleBar(u"모듈"),
 
             XUIHLayout::Make({
                 XUIVScrollView::Make({
@@ -160,7 +160,7 @@ namespace CP_SDK::UI::Views {
     /// @param p_Module Module instance
     void SettingsMainView::OnDocumentationButton(IModuleBase* p_Module)
     {
-        ShowMessageModal(u"URL opened in your web browser.");
+        ShowMessageModal(u"웹 브라우저에서 URL을 열었습니다.");
         ChatPlexSDK::OpenURL(p_Module->DocumentationURL());
     }
 
@@ -173,7 +173,7 @@ namespace CP_SDK::UI::Views {
     {
         if (p_Module->UseChatFeatures() && CPConfig::Instance()->FirstChatServiceRun)
         {
-            ShowMessageModal(u"Hey it's seems that this is the first time\nyou use a chat module!\n<b><color=yellow>The configuration page has been opened in your browser!</color></b>");
+            ShowMessageModal(u"채팅 모듈을 처음 사용하고 있습니다!\n<b><color=yellow>웹 브라우저에서 설정 페이지를 열었습니다.</color></b>");
 
             Chat::Service::OpenWebConfiguration();
 
