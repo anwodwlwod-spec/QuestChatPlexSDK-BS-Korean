@@ -29,9 +29,9 @@ namespace CP_SDK::UI::Views {
     void SettingsRightView::OnViewCreation_Impl()
     {
         Templates::FullRectLayout({
-            Templates::TitleBar(u"Other settings"),
+            Templates::TitleBar(u"기타 설정"),
 
-            XUIText::Make(u"No available other settings at the moment!")->AsShared()
+            XUIText::Make(u"현재 사용 가능한 기타 설정이 없습니다!")->AsShared()
         })
         ->SetBackground(true, std::nullopt, true)
         ->BuildUI(get_transform());
