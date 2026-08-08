@@ -1,3 +1,15 @@
+# QuestChatPlexSDK-BS Korean
+
+**Unofficial Korean localization of HardCPP's QuestChatPlexSDK-BS.**
+
+Original project: https://github.com/hardcpp/QuestChatPlexSDK-BS
+
+Korean localization/modifications by anwodwlwod-spec.
+
+This repository retains the original MIT License and copyright notices. See `LICENSE` for details.
+
+---
+
 Quest version of ChatPlex SDK for BeatSaber
 
 This SDK was created to simplify and streamline mods creation for multiple games. It mostly provides generic components and utilities for Unity modding and also specific components and utilities for BeatSaber
