@@ -10,10 +10,9 @@ This repository retains the original MIT License and copyright notices. See `LIC
 
 ## 다운로드 / Download
 
-한글 패치가 적용된 최신 빌드는 이 저장소의 **Releases**에서 받을 수 있습니다.
+한글 패치가 적용된 최신 `.qmod` 파일은 이 저장소의 **Releases**에서 받을 수 있습니다.
 
-- `.qmod` — 일반 설치용
-- `.so` — 수동 설치/교체용
+`.qmod` 파일을 설치하면 한글 패치가 적용됩니다.
 
 ---
 
