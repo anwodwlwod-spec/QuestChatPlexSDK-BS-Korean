@@ -33,7 +33,7 @@ namespace CP_SDK::UI::Views {
         auto l_Sprite = Unity::SpriteU::CreateFromRaw(Assets::ChatPlexLogoTransparent_png);
 
         Templates::FullRectLayout({
-            Templates::TitleBar(u"Powered By"),
+            Templates::TitleBar(u"제공"),
 
             XUIPrimaryButton::Make(u"")
                 ->SetBackgroundSprite(nullptr)
